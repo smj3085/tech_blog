@@ -1,4 +1,8 @@
 body {
-    background: aliceblue;
+    background-color: aliceblue;
     font-family: 'Noto Sans', sans-serif;
+}
+
+.post {
+    border-bottom: solid 2px #173778;
 }

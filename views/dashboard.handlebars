@@ -1,0 +1,37 @@
+<div class="row justify-content-around">
+ 
+  <div class="col-md-4 mb-5">
+    <form class="form new-post-form">
+      <h1 class="h3 mb-3 font-weight-normal">Create a post</h1>
+      <label for="post-name" class="sr-only">Post title</label>
+      <input type="text" id="post-name" class="form-control mb-3" placeholder="What even is JavaScript?" required>
+      <label for="post-desc" class="sr-only">Content</label>
+      <textarea type="textarea" id="post-desc" class="form-control mb-3" placeholder="Write your blog here" required></textarea>
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Create</button>
+    </form>
+  </div>
+
+
+  
+  <div class="col-md-6">
+    {{#if posts.length}}
+    <h3>All your posts:</h3>
+
+    {{#each posts as |post|}}
+    <div class="row mb-2">
+      <div class="col-md-6">
+        <h4><a href="/post/{{post.id}}">{{post.name}}</a></h4>
+        <p>{{shorter_extract post.description}}</p>
+      </div>
+      <div class="col-md-6">
+         <a class="btn btn-lg btn-warning" href="/edit/{{post.id}}">Edit</a>
+        <button class="btn btn-lg btn-danger delete-post-btn" data-id="{{post.id}}">Delete</button>
+       
+      </div>
+    </div>
+    {{/each}}
+  </div>
+  {{/if}}
+</div>
+
+<script src="/js/dashboard.js"></script>
