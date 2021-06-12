@@ -1,0 +1,16 @@
+<section class="container">
+    <form class="form edit-form font">
+        <div class="form-group">
+          <input class="form-input" type="text" id="edit-title" value="{{name}}" required/>
+        </div>
+      <div class="form-group">
+        <textarea class="form-input" type="text" id="edit-description" required>{{description}}</textarea>
+      </div>
+      <div class="form-group">
+        <button class="btn btn-primary log" type="submit" id="updateButton" data-id="{{id}}">Update</button>
+      </div>
+      <div class="form-group">
+        <button class="btn btn-primary log" type="submit" id="deleteButton" data-id="{{id}}">Delete</button>
+      </div>
+    </form>
+</section>

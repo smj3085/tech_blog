@@ -1,32 +1,22 @@
-async function commentFormHandler(event) {
+const newComment = async (event) => {
     event.preventDefault();
 
-    const comment_text = document.querySelector('input[name="comment-body"]').value.trim();
+    const id = event.target.getAttribute('post-id');
+    const comment = $('#comment').val().trim();
 
-    const post_id = window.location.toString().split('/')[
-        window.location.toString().split('/').length - 1
-    ];
-
-    if (comment_text) {
-        const response = await fetch('/api/comments', {
+    if (comment) {
+        const response = await fetch(`/api/posts/comments/${id}`, {
             method: 'POST',
-            body: JSON.stringify({
-                post_id,
-                comment_text
-            }),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
+            body: JSON.stringify({ comment }),
+            headers: { 'Content-Type': 'application/json' },
+          });
 
-        if (response.ok) {
-            document.location.reload();
-
-        } else {
-            alert(response.statusText);
-            document.querySelector('#comment-form').style.display = "block";
-        }
+          if (response.ok) {
+            document.location.replace(`/comments/${id}`);
+          } else {
+            console.log('ERROR')
+          }
     }
-}
+};
 
-document.querySelector('.comment-form').addEventListener('submit', commentFormHandler);
+$('#commentButton').on('submit', newComment);
