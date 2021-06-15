@@ -8,10 +8,11 @@
       <button class="btn btn-lg btn-primary btn-block" type="submit">Create</button>
     </form>
   </div>
-        
+  
+  <div class="row">
     <h2 class="title pb-4">Your posts</h2><hr>
     {{#if posts.length}}
-    </div>
+  </div>
 
     {{#each posts as |post|}}
     <h4><a href="/posts/{{post.id}}">{{post.name}}</a></h4>
@@ -22,7 +23,7 @@
         </div>
     {{/each}}
     
-
+  
   {{else}}
 <h6 class="pb-4 has-text-centered is-italic">You do not currently have any posts</h6>
 

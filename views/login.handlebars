@@ -1,30 +1,41 @@
 
-  <div class="row justify-content-around">
-    <div class="col-md-6 mb-5">
-      <form class="form-signin login-form">
-        <h2 class="mb-4 font-weight-bold">Login</h2>
-            <label for="email-login" class="sr-only">Email:</label>
-            <input type="email" id="email-login" class="form-control mb-3" placeholder="Email" required autofocus>
-        <label for="password-login" class="sr-only">Password:</label>
-        <input type="password" id="password-login" class="form-control mb-3" placeholder="Password" required>
-
-        <button class="btn btn-lg btn-primary btnSubmit" type="submit">Login</button>
-      </form>
-    </div>
-
-    <div class="col-md-6">
-      <form class="form-signin signup-form">
-        <h2 class="h3 mb-4 font-weight-bold">Signup</h2>
-        <label for="name-signup" class="sr-only">Name</label>
-        <input type="name" id="name-signup" class="form-control mb-3" placeholder="Name" required autofocus>
-        <label for="email-signup" class="sr-only">Email</label>
-        <input type="email" id="email-signup" class="form-control mb-3" placeholder="Email" required>
-        <label for="password-signup" class="sr-only">Password</label>
-        <input type="password" id="password-signup" class="form-control mb-3" placeholder="Password" required>
-        <button class="btn btn-lg btn-primary btnSubmit" type="submit">Signup</button>
-      </form>
-    </div>
-  </div>
+<div class="container h-100">
+		<div class="d-flex justify-content-center h-100">
+			<div class="user_card">
+				<div class="d-flex justify-content-center">
+					<div class="brand_logo_container">
+						<img src="/assets/img/usericon.png" class="brand_logo" height="200" width="200" alt="Logo">
+					</div>
+				</div>
+				<div class="d-flex justify-content-center form_container">
+					<form class="form-signin login-form">
+						<div class="input-group mb-3">
+							<div class="input-group-append">
+								<span class="input-group-text"><i class="fas fa-user"></i></span>
+							</div>
+              <label for="email-login" class="sr-only">Email</label>
+							<input type="email" id="email-login" class="form-control input_user" placeholder="Email" required autofocus>
+						</div>
+						<div class="input-group mb-2">
+							<div class="input-group-append">
+								<span class="input-group-text"><i class="fas fa-key"></i></span>
+							</div>
+              <label for="password-login" class="sr-only">Password:</label>
+							<input type="password" id="password-login" class="form-control input_pass" placeholder="password">
+						</div>
+							<div class="d-flex justify-content-center mt-3 login_container">
+				 	<button type="submit" class="btn btn-sm btn-primary btnSubmit">Login</button>
+				   </div>
+					</form>
+				</div>
+				<div class="mt-4">
+					<div class="d-flex justify-content-center links">
+						Don't have an account? <a href="/signup" class="ml-2">Sign Up</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 
 
