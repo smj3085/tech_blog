@@ -10,6 +10,14 @@ router.get('/', async (req, res) => {
           model: User,
           attributes: ['name'],
         },
+        {
+          model: Comment,
+          attributes: ['comment'],
+          include: {
+            model: User,
+            attributes: ['name'],
+          },
+        },
       ],
     });
 
@@ -74,16 +82,13 @@ router.get('/dashboard', withAuth, async (req, res) => {
 router.get('/login', (req, res) => {
   // If the user is already logged in, redirect the request to another route
   if (req.session.logged_in) {
-    res.redirect('/profile');
+    res.redirect('/dashboard');
     return;
   }
 
   res.render('login');
 });
 
-router.get('/signup', (req, res) => {
-  res.render('signup');
-});
 
 router.get('/edit/:id', async (req, res) => {
   try {
@@ -91,7 +96,7 @@ router.get('/edit/:id', async (req, res) => {
       include: [
         {
           model: User,
-          attributes: ['name'],
+          attributes: ['name', 'id', 'description', 'date_created'],
         },
         {
           model: Comment,
@@ -113,6 +118,37 @@ router.get('/edit/:id', async (req, res) => {
   } catch (err) {
     res.status(500).json(err);
   }
+});
+
+// router.get('/edit/:id', withAuth, (req, res) => {
+//   Post.findOne({
+//     where: {
+//       id: req.params.id,
+//     },
+//     attributes: ['id', 'name', 'description', 'date_created'],
+//     include: [
+//       {
+//         model: User,
+//         attributes: ['name'],
+//       },
+//     ],
+//   })
+//     .then((dbPostData) => {
+//       if (!dbPostData) {
+//         res.status(404).json({ message: 'No post found with this id' });
+//         return;
+//       }
+//       const post = dbPostData.get({ plain: true });
+//       res.render('edit-post', { post, logged_in: req.session.logged_in });
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//       res.status(500).json(err);
+//     });
+// });
+
+router.get('/', (req, res) => {
+  res.render('dashboard');
 });
 
 
