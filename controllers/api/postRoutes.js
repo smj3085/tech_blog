@@ -84,11 +84,11 @@ router.delete("/:id", withAuth, async (req, res) => {
       where: {
       id: req.params.id,
       user_id: req.session.user_id
-      }
+      },
     });
 
     if (!deletePost) {
-      res(404).json({ message: "No post found with that ID" });
+      res(404).json({ message: "No post found with that id" });
     }
     res.status(200).json(deletePost);
   } catch (err) {
@@ -96,26 +96,53 @@ router.delete("/:id", withAuth, async (req, res) => {
   }
 });
 
-
-router.put("/:id", withAuth, async (req, res) => {
-  try {
-    const updatePost = await Post.update(
-      {
-        name: req.body.name,
-        description: req.body.description,
+router.put('/:id', withAuth, (req, res) => {
+  Post.update(
+    {
+      name: req.body.name,
+      description: req.body.description,
+    },
+    {
+      where: {
+        id: req.params.id,
       },
-      {
-        where: {
-          id: req.params.id,
-        },
+    }
+  )
+    .then((dbPostData) => {
+      console.log(dbPostData);
+      if (!dbPostData) {
+        res.status(404).json({ message: 'No post found with this id' });
+        return;
       }
-    );
-
-    res.status(200).json(updatePost);
-  } catch (err) {
-    res.status(400).json(err);
-  }
+      res.json(dbPostData);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
 });
+// router.put("/:id", withAuth, async (req, res) => {
+//   try {
+//     const updatePost = await Post.update(
+//       {
+//         name: req.body.name,
+//         description: req.body.description,
+//       },
+//       {
+//         where: {
+//           id: req.params.id,
+//         },
+//       }
+//     );
+
+//     if (!updatePost) {
+//       res(404).json({ message: "No post found with that id" });
+//     }
+//     res.status(200).json(updatePost);
+//   } catch (err) {
+//     res.status(400).json(err);
+//   }
+// });
 
 
 module.exports = router;

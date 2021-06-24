@@ -1,18 +1,16 @@
-<div class="text-center">
+<div class="container text-center">
   <h2>{{name}}</h2>
   <p>{{description}}</p>
   <p>Created by {{user.name}} on {{format_date date_created}}</p>
 
-
   <div class="row justify-content-md-center">
     <div class="col-md-12">
-
        {{#if logged_in}}
-      <form class="card-body comment-form" id="comment-form">
+      <form class="form-comment comment-form">
         <h5 class="mb-3 font-weight-normal">Comment on: '{{name}}'</h5>
-        <textarea id="comment" name="comment-desc" class="form-control form-input mb-3"
-          placeholder="Leave a comment..." required></textarea>
-        <button class="btn btn-lg btn-primary commentBtn" type="submit">Submit</button>
+        <textarea id="comment" name="comment-body" class="form-control form-input mb-3"
+          placeholder="Leave a comment!" required></textarea>
+        <button class="btn btn-sm btn-primary comment-form" type="submit">Submit</button>
       </form>
         {{else}}
         <h4>Login to comment</h4>
@@ -25,20 +23,23 @@
  <h3>Comments:</h3>
   {{#if comments.length}}
     {{#each comments as |comment|}}
-
 <div class="card mb-3">
-  <div class="card-body"></div>  
+  
+  <div class="card-body">
+    
     <h5 class="card-text">{{this.comment}}</h5>
     <p class="card-title">Created by: {{this.user.name}} on {{format_date this.createdAt}}</p>
+  
   </div>
 </div>
 {{/each}}
     {{else}}
 
-    <p>Be the first person to comment</p>
+    <p class="font-italic">Be the first person to comment</p>
 
     {{/if}}
   </div>
 </div>
+
 
   <script src="/js/comment.js"></script>

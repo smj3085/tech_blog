@@ -1,38 +1,51 @@
-const editFormHandler = async (event) => {
+async function editFormHandler(event) {
   event.preventDefault();
-  
-    const name = document.querySelector('#edit-name').value.trim();
-    const description = document.querySelector('#edit-desc').value.trim();
-  
-    const response = await fetch(`/api/posts/${id}`, {
-      method: 'PUT',
-      body: JSON.stringify({ id, name, description }),
-      headers: { 'Content-Type': 'application/json' },
-    });
 
-    if (response.ok) {
-      document.location.replace('/dashboard');
-    } else {
-      console.log('ERROR')
-    }
-};  
+  const name = document.querySelector('input[name="post-title"]').value.trim();
+  const description = document.querySelector('textarea[name="content"]').value.trim();
 
-document.querySelector('.updateBtn').addEventListener('submit', editFormHandler);
+  const id = window.location.toString().split('/')[
+    window.location.toString().split('/').length - 1
+  ];
+
+  const response = await fetch(`/api/posts/${id}`, {
+    method: 'PUT',
+    body: JSON.stringify({
+      post_id: id,
+      name,
+      description,
+    }),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+
+  if (response.ok) {
+    document.location.replace('/dashboard/');
+  } else {
+    alert(response.statusText);
+  }
+}
 
 const delButtonHandler = async (event) => {
-  if (event.target.hasAttribute('data-id')) {
-    const id = event.target.getAttribute('data-id');
+  const id = window.location.toString().split('/')[
+    window.location.toString().split('/').length - 1
+  ];
 
-    const response = await fetch(`/api/posts/${id}`, {
-      method: 'DELETE',
-    });
-
-    if (response.ok) {
-      document.location.replace('/dashboard');
-    } else {
-      alert('Failed to delete post');
-    }
+  const response = await fetch(`/api/posts/${id}`, {
+    method: 'DELETE',
+  });
+  if (response.ok) {
+    document.location.replace('/dashboard');
+  } else {
+    alert('Failed to delete post');
   }
 };
 
-document.querySelector('.deleteBtn').addEventListener('submit', delButtonHandler);
+document
+  .querySelector('.editBtn')
+  .addEventListener('click', editFormHandler);
+
+document
+  .querySelector('.deleteBtn')
+  .addEventListener('click', delButtonHandler);
