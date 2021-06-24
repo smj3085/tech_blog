@@ -23,12 +23,14 @@ const newFormHandler = async (event) => {
       }
     }
   };
+
+  document.querySelector('.new-post-form').addEventListener('submit', newFormHandler);
   
   const delButtonHandler = async (event) => {
     if (event.target.hasAttribute('data-id')) {
       const id = event.target.getAttribute('data-id');
   
-      const response = await fetch(`/api/posts/${id}`, {
+      const response = await fetch(`/api/posts/delete/${id}`, {
         method: 'DELETE',
       });
   
@@ -40,10 +42,4 @@ const newFormHandler = async (event) => {
     }
   };
   
-  document
-    .querySelector('.new-post-form')
-    .addEventListener('submit', newFormHandler);
-  
-  document
-    .querySelector('.delete-post-btn')
-    .addEventListener('click', delButtonHandler);
+  document.querySelector('.deleteBtn').addEventListener('submit', delButtonHandler);

@@ -15,19 +15,20 @@
   </div>
 
     {{#each posts as |post|}}
-    <h4><a href="/posts/{{post.id}}">{{post.name}}</a></h4>
+    <h4><a href="/post/{{post.id}}">{{post.name}}</a></h4>
         <p>{{post.description}}</p>
         
-            <a href="/dashboard/edit/{{post.id}}"><button class="btn mb-5 ml-5 btn-primary" type="submit">Edit post</button></a>
-            <a href="/dashboard/delete/{{post.id}}"><button class="btn mb-5 ml-5 btn-primary" type="submit">Delete post</button></a>
+            <a href="/dashboard/edit/{{post.id}}"><button class="btn mb-5 ml-5 btn-primary editBtn" type="submit">Edit post</button></a>
+            <a href="/dashboard/delete/{{post.id}}"><button class="btn mb-5 ml-5 btn-primary deleteBtn" type="submit">Delete post</button></a>
         </div>
     {{/each}}
     
   
   {{else}}
-<h6 class="pb-4 has-text-centered is-italic">You do not currently have any posts</h6>
+  <h6 class="pb-4 has-text-centered is-italic">You do not currently have any posts</h6>
 
   {{/if}}
 
 
-<script src="./js/dashboard.js"></script>
+<script src="/js/dashboard.js"></script>
+<script src="/js/editPost.js"></script>

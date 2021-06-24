@@ -1,21 +1,48 @@
-{{#each posts as |post|}}
+<div class="text-center">
+  <h2>{{name}}</h2>
+  <p>{{description}}</p>
+  <p>Created by {{user.name}} on {{format_date date_created}}</p>
 
-{{#if loggedIn}}
-<div class="card">
-    <h3 class="card-header"></h3>
-    <form class="card-body comment-form" id="comment-form">
-        <label class="form-label">Comment</label>
-        <input id="comment" name="comment-body" class="form-input" />
 
-        <button type="submit" class="btn">Submit</button>
-    </form>
+  <div class="row justify-content-md-center">
+    <div class="col-md-12">
+
+       {{#if logged_in}}
+      <form class="card-body comment-form" id="comment-form">
+        <h5 class="mb-3 font-weight-normal">Comment on: '{{name}}'</h5>
+        <textarea id="comment" name="comment-body" class="form-control form-input mb-3"
+          placeholder="Leave a comment..." required></textarea>
+        <button class="btn btn-lg btn-primary commentBtn" type="submit">Submit</button>
+      </form>
+        {{else}}
+        <h4>Login to comment</h4>
+         {{/if}}
+    </div>
+  </div>
+
+<div class="row justify-content-md-center mt-5">
+  <div class="col-md-12">
+ <h3>Comments:</h3>
+  {{#if comments.length}}
+    {{#each comments as |comment|}}
+{{!-- <div class="card mb-3">
+  
+  <div class="card-body">
+    
+    <h5 class="card-text">{{this.comment}}</h5>
+    <p class="card-title">Created by: {{this.user.name}} on {{format_date this.createdAt}}</p>
+  
+  </div> --}}
 </div>
-{{/if}}
+{{/each}}
+    {{else}}
 
-{{> comments post.comments}}
+    <p>Be the first person to comment</p>
 
-{{#if loggedIn}}
+    {{/if}}
+  </div>
+</div>
 
-<script src="./js/comment.js"></script>
-
-
+  <script src="/js/comment.js"></script>
+  <script src="/js/dashboard.js"></script>
+<script src="/js/editPost.js"></script>

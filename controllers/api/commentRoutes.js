@@ -25,10 +25,10 @@ router.get('/:id', (req, res) => {
         })
 });
 
-router.post("/comment/:id", async (req, res) => {
+router.post("/comment/:id", withAuth, async (req, res) => {
     try {
       const newComment = await Comment.create({
-        description: req.body.comment,
+        comment: req.body.comment,
         post_id: req.params.id,
         user_id: req.session.user_id,
       });
@@ -38,8 +38,9 @@ router.post("/comment/:id", async (req, res) => {
       res.status(400).json(err);
     }
   });
+  
 
-router.delete("/delete/:id", async (req, res) => {
+router.delete("/delete/:id", withAuth, async (req, res) => {
     try {
       const deleteComment = await Comment.destroy({
         where: {
@@ -55,11 +56,11 @@ router.delete("/delete/:id", async (req, res) => {
     }
   });
 
-  router.put("/:id", async (req, res) => {
+  router.put("/:id", withAuth, async (req, res) => {
     try {
       const updateComment = await Comment.update(
         {
-          description: req.body.description,
+          comment: req.body.comment,
         },
         {
           where: {
