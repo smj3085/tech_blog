@@ -32,7 +32,7 @@
 
   ## Usage Guidelines
   * To see deployed app:
-  (https://safe-tor-01341.herokuapp.com)
+  (https://arcane-retreat-86441.herokuapp.com)
 
   ## Credits
   * sm3085
