@@ -103,6 +103,7 @@ router.get('/edit/:id', async (req, res) => {
           include: [
             {
               model: User,
+              attributes: ['id', 'comment', 'post_id', 'user_id', 'date_created'],
             },
           ],
         },
@@ -123,25 +124,42 @@ router.get('/edit/:id', async (req, res) => {
 // router.get('/edit/:id', withAuth, (req, res) => {
 //   Post.findOne({
 //     where: {
-//       id: req.params.id,
+//       id: req.params.id
 //     },
-//     attributes: ['id', 'name', 'description', 'date_created'],
-//     include: [
-//       {
-//         model: User,
-//         attributes: ['name'],
-//       },
+//     attributes: [
+//       'id',
+//       'name',
+//       'description',
+//       'date_created'
 //     ],
+//     include: [{
+//       model: User,
+//       attributes: ['username']
+//     },
+//     {
+//       model: Comment,
+//       attributes: [
+//         'id', 
+//         'comment', 
+//         'post_id', 
+//         'user_id', 
+//         'date_created'],
+//     include: {
+//       model: User,
+//       attributes: ['username']
+//     }
+//     }]
 //   })
-//     .then((dbPostData) => {
+//     .then(dbPostData => {
 //       if (!dbPostData) {
-//         res.status(404).json({ message: 'No post found with this id' });
-//         return;
+//           res.status(404).json({ message: 'No post found with this id' });
+//           return;
 //       }
+
 //       const post = dbPostData.get({ plain: true });
-//       res.render('edit-post', { post, logged_in: req.session.logged_in });
+//       res.render('editPost', { post, loggedIn: true });
 //     })
-//     .catch((err) => {
+//     .catch(err => {
 //       console.log(err);
 //       res.status(500).json(err);
 //     });
